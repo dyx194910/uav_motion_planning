@@ -61,6 +61,7 @@ add_executable(test_astar_searching src/test_astar_searching.cc)
 add_executable(test_rrt_searching src/test_rrt_searching.cc)
 add_executable(test_rrt_star_searching src/test_rrt_star_searching.cc)
 add_executable(test_kino_astar_searching src/test_kino_astar_searching.cc)
+add_executable(test_hill_terrain_searching src/test_hill_terrain_searching.cc)
 
 # trajectory_optimization
 add_executable(test_qpsolve src/test_qpsolve.cc)
@@ -97,6 +98,10 @@ target_link_libraries(test_rrt_star_searching
 )
 
 target_link_libraries(test_kino_astar_searching
+    ${catkin_LIBRARIES}
+)
+
+target_link_libraries(test_hill_terrain_searching
     ${catkin_LIBRARIES}
 )
 

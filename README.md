@@ -9,7 +9,7 @@
 2. Clone the repository.
 
     ```bash
-    git clone git@github.com:peiyu-cui/uav_motion_planning.git
+    git clone https://github.com/ClaudyFlow/uav_motion_planning.git
     ```
 
 3. Install dependences.
@@ -17,7 +17,7 @@
     ```bash
     # eigen
     sudo apt install libeigen3-dev
-    
+
     # osqp and osqp-eigen
     cd uav_motion_planning
     git submodule update --init --recursive
@@ -26,7 +26,7 @@
     cd 3rd/osqp
     mkdir build
     cd build
-    cmake ..  # NOTE: if error occurs on cmake version, just change the cmake_minimum_required in the first line of CMakeLists.txt
+    cmake ..
     make
     sudo make install
 
@@ -80,13 +80,13 @@
 
   - tie_breaker: enhance the speed of searching
 
-  - weighted A*: 
-    
-    ![Image](https://github.com/peiyu-cui/motion-planning/blob/main/pic/equation1.png?raw=true)
+  - weighted A*:
+
+    ![Image](https://github.com/ClaudyFlow/motion-planning/blob/main/pic/equation1.png?raw=true)
 
 - Simulation:
 
-  ![Image](https://github.com/peiyu-cui/motion-planning/blob/main/pic/astar.gif?raw=true)
+  ![Image](https://github.com/ClaudyFlow/motion-planning/blob/main/pic/astar.gif?raw=true)
 
 ### 1.2. Kinodynamic A*
 
@@ -132,7 +132,7 @@
 
 - Simulation:
 
-  ![Image](https://github.com/peiyu-cui/motion-planning/blob/main/pic/kino_astar.gif?raw=true)
+  ![Image](https://github.com/ClaudyFlow/motion-planning/blob/main/pic/kino_astar.gif?raw=true)
 
 ### 1.3. SE(3) Planning
 
@@ -178,7 +178,7 @@
 
 - Simulation:
 
-  ![Image](https://github.com/peiyu-cui/motion-planning/blob/main/pic/kino_se3.gif?raw=true)
+  ![Image](https://github.com/ClaudyFlow/motion-planning/blob/main/pic/kino_se3.gif?raw=true)
 
 ## 2. Sampling-Based Methods
 
@@ -219,7 +219,7 @@
 
 - Simulation:
 
-  ![Image](https://github.com/peiyu-cui/motion-planning/blob/main/pic/rrt.gif?raw=true)
+  ![Image](https://github.com/ClaudyFlow/motion-planning/blob/main/pic/rrt.gif?raw=true)
 
 ### 2.2. RRT*:
 
@@ -248,7 +248,7 @@
 
 - Simulation:
 
-  ![Image](https://github.com/peiyu-cui/motion-planning/blob/main/pic/rrt_star.gif?raw=true)
+  ![Image](https://github.com/ClaudyFlow/motion-planning/blob/main/pic/rrt_star.gif?raw=true)
 
 ## 3. Trajectory Optimization
 
@@ -268,14 +268,14 @@
 
 - Methods:
   - **Front-End (Path Finding)**: RRT* or other search-based method, this project is based on RRT*
-  
+
   - **Back-End (Trajectory Optimization)**: construct a Quadratic Program(QP) based on the discrete waypoints obtained by front RRT*, I use **OSQP Solver** to solve the QP
-  
+
   - **Paper:**: D. Mellinger and V. Kumar, [“Minimum snap trajectory generation and control for quadrotors”](https://web.archive.org/web/20120713162030id_/http://www.seas.upenn.edu/~dmel/mellingerICRA11.pdf)
 
 - Simulation:
-  
-  ![Image](https://github.com/peiyu-cui/motion-planning/blob/main/pic/minimum_jerk.gif?raw=true)
+
+  ![Image](https://github.com/ClaudyFlow/motion-planning/blob/main/pic/minimum_jerk.gif?raw=true)
 
   - **Red Line**: RRT* Path
   - **Red Sphere**: RRT* Waypoints
@@ -287,7 +287,7 @@
 1. Clone the repository.
 
     ```bash
-    git clone https://github.com/peiyu-cui/uav_motion_planning.git
+    git clone https://github.com/ClaudyFlow/uav_motion_planning.git
     ```
 
 2. Go to the workspace folder and build the codes:

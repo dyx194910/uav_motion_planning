@@ -351,6 +351,107 @@ void MapGenerate() {
                    0, 2.0);
       break;
     }
+    case 5: {
+      double hill_center_x = 0.0;
+      double hill_center_y = 0.0;
+      double hill_radius = 8.0;
+      double hill_height = 2.5;
+      for (double gx = x_l_; gx < x_h_; gx += resolution_) {
+        for (double gy = y_l_; gy < y_h_; gy += resolution_) {
+          double dist = sqrt((gx - hill_center_x) * (gx - hill_center_x) +
+                            (gy - hill_center_y) * (gy - hill_center_y));
+          if (dist > hill_radius) continue;
+          double ratio = dist / hill_radius;
+          double gz = hill_height * (1.0 - ratio * ratio);
+          int num_h = ceil(gz / resolution_);
+          for (int iz = 0; iz < num_h; iz++) {
+            pcl::PointXYZ pt;
+            pt.x = gx;
+            pt.y = gy;
+            pt.z = iz * resolution_;
+            global_cloud_.push_back(pt);
+          }
+        }
+      }
+      break;
+    }
+    case 6: {
+      double hill_center_x1 = -8.0, hill_center_y1 = -3.0;
+      double hill_center_x2 = 5.0, hill_center_y2 = 4.0;
+      double hill_center_x3 = -5.0, hill_center_y3 = 6.0;
+      double hill_center_x4 = 10.0, hill_center_y4 = -5.0;
+      double hill_radius1 = 5.0, hill_radius2 = 6.0;
+      double hill_radius3 = 4.0, hill_radius4 = 5.0;
+      double hill_height1 = 1.8, hill_height2 = 2.2;
+      double hill_height3 = 1.5, hill_height4 = 2.0;
+      for (double gx = x_l_; gx < x_h_; gx += resolution_) {
+        for (double gy = y_l_; gy < y_h_; gy += resolution_) {
+          double gz = 0.0;
+          double dist1 = sqrt((gx - hill_center_x1) * (gx - hill_center_x1) +
+                             (gy - hill_center_y1) * (gy - hill_center_y1));
+          double dist2 = sqrt((gx - hill_center_x2) * (gx - hill_center_x2) +
+                             (gy - hill_center_y2) * (gy - hill_center_y2));
+          double dist3 = sqrt((gx - hill_center_x3) * (gx - hill_center_x3) +
+                             (gy - hill_center_y3) * (gy - hill_center_y3));
+          double dist4 = sqrt((gx - hill_center_x4) * (gx - hill_center_x4) +
+                             (gy - hill_center_y4) * (gy - hill_center_y4));
+          if (dist1 < hill_radius1) {
+            double ratio = dist1 / hill_radius1;
+            gz = hill_height1 * (1.0 - ratio * ratio);
+          }
+          if (dist2 < hill_radius2) {
+            double ratio = dist2 / hill_radius2;
+            gz = std::max(gz, hill_height2 * (1.0 - ratio * ratio));
+          }
+          if (dist3 < hill_radius3) {
+            double ratio = dist3 / hill_radius3;
+            gz = std::max(gz, hill_height3 * (1.0 - ratio * ratio));
+          }
+          if (dist4 < hill_radius4) {
+            double ratio = dist4 / hill_radius4;
+            gz = std::max(gz, hill_height4 * (1.0 - ratio * ratio));
+          }
+          if (gz > 0.01) {
+            int num_h = ceil(gz / resolution_);
+            for (int iz = 0; iz < num_h; iz++) {
+              pcl::PointXYZ pt;
+              pt.x = gx;
+              pt.y = gy;
+              pt.z = iz * resolution_;
+              global_cloud_.push_back(pt);
+            }
+          }
+        }
+      }
+      break;
+    }
+    case 7: {
+      double mountain_x_center = 0.0;
+      double mountain_z_peak = 3.0;
+      double mountain_half_width = 18.0;
+      double mountain_freq = 0.25;
+      for (double gx = x_l_; gx < x_h_; gx += resolution_) {
+        for (double gy = y_l_; gy < y_h_; gy += resolution_) {
+          double dx = fabs(gx - mountain_x_center);
+          if (dx > mountain_half_width) continue;
+          double x_ratio = dx / mountain_half_width;
+          double z_profile = mountain_z_peak * (1.0 - x_ratio * x_ratio);
+          double wave = 0.3 * sin(gy * mountain_freq * M_PI);
+          double gz = z_profile + wave;
+          if (gz > 0.01) {
+            int num_h = ceil(gz / resolution_);
+            for (int iz = 0; iz < num_h; iz++) {
+              pcl::PointXYZ pt;
+              pt.x = gx;
+              pt.y = gy;
+              pt.z = iz * resolution_;
+              global_cloud_.push_back(pt);
+            }
+          }
+        }
+      }
+      break;
+    }
   }
 
   global_cloud_.width = global_cloud_.points.size();
